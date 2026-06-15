@@ -21,6 +21,24 @@ function elemClick(elem) {
 }
 document.addEventListener("keydown", function(ev) {
     const modifer = ev.metaKey || ev.ctrlKey;
+    if (!modifier && elemSelected) {
+        let currentTop = parseInt(elemSelected.style.top) || 50;
+        let currentLeft = parseInt(elemSelected.style.left) || 50;
+        const moveAmount = 10;
+        if (ev.key === "ArrowUp") {
+            ev.preventDefault();
+            elemSelected.style.top = (currentTop - moveAmount) + "px";
+        } else if (ev.key === "ArrowDown") {
+            ev.preventDefault();
+            elemSelected.style.top = (currentTop + moveAmount) + "px";
+        } else if (ev.key === "ArrowLeft") {
+            ev.preventDefault();
+            elemSelected.style.left = (currentLeft - moveAmount) + "px";
+        } else if (ev.key === "ArrowRight") {
+            ev.preventDefault();
+            elemSelected.style.left = (currentLeft + moveAmount) + "px";
+        }
+    }
     if (modifer) {
         if (ev.key.toLowerCase() === "m") {
             ev.preventDefault();
@@ -30,9 +48,11 @@ document.addEventListener("keydown", function(ev) {
                 newBox.classList.add("box");
                 newBox.style.width = "10%";
                 newBox.style.height = "10%";
+                newBox.style.top = "50px";
+                newBox.style.left = "50px";
                 newBox.style.zIndex = "0";
-                newBox.addEventListener("click", function() {
-                    clickEvent.stopPropagation();
+                newBox.addEventListener("click", function(ev) {
+                    ev.stopPropagation();
                     elemClick(newBox);
                 });
                 document.body.appendChild(newBox);
