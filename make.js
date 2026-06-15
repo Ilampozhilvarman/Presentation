@@ -123,16 +123,23 @@ document.addEventListener("keydown", function(ev) {
     }
 });
 function makeElementDraggable(elem) {
-    elem.setAttribute("draggable", "true");
-    let offsetX = 0;
-    let offsetY = 0;
-    elem.addEventListener("dragstart", function(e) {
-        offsetX = e.clientX - (parseInt(elem.style.left) || 50);
-        offsetY = e.clientY - (parseInt(elem.style.top) || 50);
+    elem.addEventListener("mousedown", function(e) {
+        if (e.offsetX > elem.clientWidth - 15 && e.offsetY > elem.clientHeight - 15) {
+            return;
+        }
+        e.preventDefault();
         elemClick(elem);
-    });
-    elem.addEventListener("dragend", function(e) {
-        elem.style.left = (e.clientX - offsetX) + "px";
-        elem.style.top = (e.clientY - offsetY) + "px";
+        const offsetX = e.clientX - (parseInt(elem.style.left) || 50);
+        const offsetY = e.clientY - (parseInt(elem.style.top) || 50);
+        function mouseMoveHandler(moveEv) {
+            elem.style.left = (moveEv.clientX - offsetX) + "px";
+            elem.style.top = (moveEv.clientY - offsetY) + "px";
+        }
+        function mouseUpHandler() {
+            document.removeEventListener("mousemove", mouseMoveHandler);
+            document.removeEventListener("mouseup", mouseUpHandler);
+        }
+        document.addEventListener("mousemove", mouseMoveHandler);
+        document.addEventListener("mouseup", mouseUpHandler);
     });
 }
