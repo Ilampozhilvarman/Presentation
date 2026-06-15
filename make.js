@@ -21,7 +21,7 @@ function elemClick(elem) {
 }
 document.addEventListener("keydown", function(ev) {
     const modifier = ev.metaKey || ev.ctrlKey;
-    if (modifer) {
+    if (modifier) {
         if (ev.key.toLowerCase() === "i") {
             ev.preventDefault();
             let newElem = prompt("What new element do you want: ");
