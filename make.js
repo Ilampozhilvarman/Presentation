@@ -29,7 +29,7 @@ document.addEventListener("keydown", function(ev) {
                 newBox.style.width = "10%";
                 newBox.style.height = "10%";
                 newBox.addEventListener("click", function() {
-                    elemClick(box);
+                    elemClick(newBox);
                 });
                 document.body.appendChild(newBox);
             }
