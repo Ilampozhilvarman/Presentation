@@ -32,6 +32,8 @@ document.addEventListener("keydown", function(ev) {
         else if (ev.key.toLowerCase() === "d") {
 
         }
-        else if (ev.key.toLowerCase() === "")
+        else if (ev.key.toLowerCase() === "") {
+            
+        }
     }
 });
