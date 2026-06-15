@@ -12,4 +12,5 @@ html, body {
     resize: both;
     border: 1px solid black;
     cursor: move;
+    overflow: auto;
 }
