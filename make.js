@@ -11,8 +11,11 @@ command d: download
 
 let elemSelected = null;
 function elemClick(elem) {
+    if (elemSelected) {
+        elemSelected.classList.remove("selected");
+    }
     elemSelected = elem;
-    alert("E");
+    elemSelected.classList.add("selected");
 }
 document.addEventListener("keydown", function(ev) {
     const modifer = ev.metaKey || ev.ctrlKey;

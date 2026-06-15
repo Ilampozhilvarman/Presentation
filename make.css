@@ -14,3 +14,8 @@ html, body {
     cursor: move;
     overflow: auto;
 }
+
+.box.selected {
+    border: 2px solid #2196F3; /* Bright blue border when selected */
+    outline: 2px solid rgba(33, 150, 243, 0.3);
+}
