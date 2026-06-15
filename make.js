@@ -20,27 +20,9 @@ function elemClick(elem) {
     elemSelected.classList.add("selected");
 }
 document.addEventListener("keydown", function(ev) {
-    const modifer = ev.metaKey || ev.ctrlKey;
-    if (!modifier && elemSelected) {
-        let currentTop = parseInt(elemSelected.style.top) || 50;
-        let currentLeft = parseInt(elemSelected.style.left) || 50;
-        const moveAmount = 10;
-        if (ev.key === "ArrowUp") {
-            ev.preventDefault();
-            elemSelected.style.top = (currentTop - moveAmount) + "px";
-        } else if (ev.key === "ArrowDown") {
-            ev.preventDefault();
-            elemSelected.style.top = (currentTop + moveAmount) + "px";
-        } else if (ev.key === "ArrowLeft") {
-            ev.preventDefault();
-            elemSelected.style.left = (currentLeft - moveAmount) + "px";
-        } else if (ev.key === "ArrowRight") {
-            ev.preventDefault();
-            elemSelected.style.left = (currentLeft + moveAmount) + "px";
-        }
-    }
+    const modifier = ev.metaKey || ev.ctrlKey;
     if (modifer) {
-        if (ev.key.toLowerCase() === "m") {
+        if (ev.key.toLowerCase() === "i") {
             ev.preventDefault();
             let newElem = prompt("What new element do you want: ");
             if (newElem === "box") {
