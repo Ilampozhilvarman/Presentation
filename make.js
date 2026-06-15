@@ -51,6 +51,7 @@ document.addEventListener("keydown", function(ev) {
                 newBox.style.top = "50px";
                 newBox.style.left = "50px";
                 newBox.style.zIndex = "0";
+                makeElementDraggable(newBox);
                 newBox.addEventListener("click", function(ev) {
                     ev.stopPropagation();
                     elemClick(newBox);
@@ -121,3 +122,17 @@ document.addEventListener("keydown", function(ev) {
         }
     }
 });
+function makeElementDraggable(elem) {
+    elem.setAttribute("draggable", "true");
+    let offsetX = 0;
+    let offsetY = 0;
+    elem.addEventListener("dragstart", function(e) {
+        offsetX = e.clientX - (parseInt(elem.style.left) || 50);
+        offsetY = e.clientY - (parseInt(elem.style.top) || 50);
+        elemClick(elem);
+    });
+    elem.addEventListener("dragend", function(e) {
+        elem.style.left = (e.clientX - offsetX) + "px";
+        elem.style.top = (e.clientY - offsetY) + "px";
+    });
+}
