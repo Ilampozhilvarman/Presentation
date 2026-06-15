@@ -32,6 +32,7 @@ document.addEventListener("keydown", function(ev) {
                 newBox.style.height = "10%";
                 newBox.style.zIndex = "0";
                 newBox.addEventListener("click", function() {
+                    clickEvent.stopPropagation();
                     elemClick(newBox);
                 });
                 document.body.appendChild(newBox);
