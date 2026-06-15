@@ -60,7 +60,27 @@ document.addEventListener("keydown", function(ev) {
             }
         }
         else if (ev.key.toLowerCase() === "d") {
-
+            let allElems = document.querySelector(".box");
+            let layoutData = [];
+            allBoxes.forEach(box => {
+                layoutData.push({
+                    width: box.style.width,
+                    height: box.style.height,
+                    top: box.style.top,
+                    left: box.style.left,
+                    zIndex: box.style.zIndex || "0"
+                });
+            });
+            const jsonString = JSON.stringify(layoutData, null, 2);
+            const blob = new Blob([jsonString], { type: "text/plain" });
+            const url = URL.createObjectURL(blob);
+            const downloadLink = document.createElement("a");
+            downloadLink.href = url;
+            downloadLink.download = "dashboard_project.projdata";
+            document.body.appendChild(downloadLink);
+            downloadLink.click();
+            document.body.removeChild(downloadLink);
+            URL.revokeObjectURL(url);
         }
         else if (ev.key.toLowerCase() === "v") {
             ev.preventDefault();
@@ -123,11 +143,11 @@ document.addEventListener("keydown", function(ev) {
     }
 });
 function makeElementDraggable(elem) {
-    elem.addEventListener("mousedown", function(e) {
+    elem.addEventListener("mousedown", function(e) {g
         if (e.offsetX > elem.clientWidth - 15 && e.offsetY > elem.clientHeight - 15) {
             return;
         }
-        e.preventDefault();
+        e.stopPropagation();
         elemClick(elem);
         const offsetX = e.clientX - (parseInt(elem.style.left) || 50);
         const offsetY = e.clientY - (parseInt(elem.style.top) || 50);
@@ -143,3 +163,10 @@ function makeElementDraggable(elem) {
         document.addEventListener("mouseup", mouseUpHandler);
     });
 }
+
+document.body.addEventListener("click", function() {
+    if (elemSelected) {
+        elemSelected.classList.remove("selected");
+        elemSelected = null;
+    }
+});
