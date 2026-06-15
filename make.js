@@ -25,7 +25,9 @@ document.addEventListener("keydown", function(ev) {
                 newBox.classList.add("box");
                 newBox.style.width = "10%";
                 newBox.style.height = "10%";
-                newBox.setAttribute("onclick", "elemSelected(this)");
+                newBox.addEventListener("click", function() {
+                    elemClick(box);
+                });
                 document.body.appendChild(newBox);
             }
         }
@@ -33,7 +35,7 @@ document.addEventListener("keydown", function(ev) {
 
         }
         else if (ev.key.toLowerCase() === "") {
-            
+
         }
     }
 });
